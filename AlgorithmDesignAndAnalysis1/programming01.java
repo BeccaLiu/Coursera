@@ -14,21 +14,13 @@ import java.util.Queue;
 import java.util.stream.Stream;
 
 /**
- *
  * @author rliu
  */
 public class programming01 {
-    public static String FILE_NAME="IntegerArray.txt";
+    public static String FILE_NAME = "IntegerArray.txt";
 
     public static void main(String[] args) {
-        ArrayList<Integer> list = new ArrayList<Integer>();     
-//        list.add(1);
-//        list.add(6);
-//          list.add(3);
-//        list.add(2);
-//list.add(4);
-//list.add(5);
-//        System.out.println(divideAndConquer(list, 0, list.size() - 1));
+        ArrayList<Integer> list = new ArrayList<Integer>();
         try (Stream<String> stream = Files.lines(Paths.get(FILE_NAME))) {
             stream.forEach(line -> {
                 list.add(Integer.valueOf(line));
@@ -45,9 +37,9 @@ public class programming01 {
             return 0;
         } else {
             int mid = (start + end) / 2;
-            long x = divideAndConquer(list, start, mid);  
-            long y = divideAndConquer(list, mid + 1, end); 
-            long z = countsplit(list, start, end); 
+            long x = divideAndConquer(list, start, mid);
+            long y = divideAndConquer(list, mid + 1, end);
+            long z = countsplit(list, start, end);
             return x + y + z;
         }
 
@@ -57,8 +49,8 @@ public class programming01 {
         long inversion = 0;
         int mid = (start + end) / 2;
 
-        List<Integer> left = list.subList(start, mid + 1);
-        List<Integer> right = list.subList(mid + 1, end + 1);
+        List<Integer> left = new ArrayList<Integer>(list.subList(start, mid + 1));
+        List<Integer> right = new ArrayList<Integer>(list.subList(mid + 1, end + 1));
         int lIndex = 0;
         int rIndex = 0;
         int insertIndex = start;
