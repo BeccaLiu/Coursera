@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Your task is to compute the number of inversions in the file given, where the ith row of the file indicates the ith entry of an array.
  */
 package AlgorithmDesignAndAnalysis1;
 
@@ -22,13 +20,6 @@ public class programming01 {
 
     public static void main(String[] args) {
         ArrayList<Integer> list = new ArrayList<Integer>();     
-//        list.add(1);
-//        list.add(6);
-//          list.add(3);
-//        list.add(2);
-//list.add(4);
-//list.add(5);
-//        System.out.println(divideAndConquer(list, 0, list.size() - 1));
         try (Stream<String> stream = Files.lines(Paths.get(FILE_NAME))) {
             stream.forEach(line -> {
                 list.add(Integer.valueOf(line));
