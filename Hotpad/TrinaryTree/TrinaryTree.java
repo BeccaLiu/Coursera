@@ -12,17 +12,17 @@ public class TrinaryTree {
 
     public static Node root;
 
-    public static void main(String[] args) throws Exception {
-        TrinaryTree t = new TrinaryTree();
-        int[] input = {5, 4, 9, 5, 7, 2, 2, 6, 10};
-        for (int i : input) {
-            t.insert(i);
-        }
-        display(root);
-        System.out.println("");
-        t.delete(9);
-        display(root);
-    }
+//    public static void main(String[] args) throws Exception {
+//        TrinaryTree t = new TrinaryTree();
+//        int[] input = {5, 4, 9, 5, 7, 2, 2, 6, 10};
+//        for (int i : input) {
+//            t.insert(i);
+//        }
+//        display(root);
+//        System.out.println("");
+//        t.delete(9);
+//        display(root);
+//    }
 
     public TrinaryTree() {
         root = null;

@@ -1,17 +1,10 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Your task is to compute the number of inversions in the file given, where the ith row of the file indicates the ith entry of an array.
  */
 package AlgorithmDesignAndAnalysis1;
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
-import java.util.stream.Stream;
 
 /**
  * @author rliu
@@ -19,16 +12,16 @@ import java.util.stream.Stream;
 public class programming01 {
     private static String FILE_NAME = "IntegerArray.txt";
 
-    public static void main(String[] args) {
-        ArrayList<Integer> list = new ArrayList<>();
-        try (Stream<String> stream = Files.lines(Paths.get(FILE_NAME))) {
-            stream.forEach(line -> list.add(Integer.valueOf(line)));
-            System.out.print(divideAndConquer(list, 0, list.size() - 1));
-
-        } catch (Exception e) {
-            System.err.println("can not read file");
-        }
-    }
+//    public static void main(String[] args) {
+//        ArrayList<Integer> list = new ArrayList<>();
+//        try (Stream<String> stream = Files.lines(Paths.get(FILE_NAME))) {
+//            stream.forEach(line -> list.add(Integer.valueOf(line)));
+//            System.out.print(divideAndConquer(list, 0, list.size() - 1));
+//
+//        } catch (Exception e) {
+//            System.err.println("can not read file");
+//        }
+//    }
 
     private static long divideAndConquer(ArrayList<Integer> list, int start, int end) {
         if (start >= end) {
