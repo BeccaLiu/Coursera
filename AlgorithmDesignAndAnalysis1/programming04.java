@@ -10,9 +10,10 @@ import java.util.stream.Stream;
  * Your task is to code up the algorithm from the video lectures for computing strongly connected components (SCCs), and to run this algorithm on the given graph.
  */
 public class programming04 {
-    public final static String FILE = "SCC1.txt";
+    public final static String FILE = "SCC.txt";
     public static HashMap<Integer, Integer> finishTime = new HashMap<>();
     public static HashSet<Integer> visited = new HashSet<>();
+    public static HashSet<Integer> finished = new HashSet<>();
     public static int currentTime = 0;
     public static int currentSource = 0;
     public static HashMap<Integer, HashSet<Integer>> leaders = new HashMap<>();
@@ -61,11 +62,9 @@ public class programming04 {
         currentSource = 0;
         currentTime = 0;
         nodes = sortHashMapByValues(finishTime);
-        System.out.println(nodes);
-
+        //   System.out.println(nodes);
         dfs_loop(map, nodes);
-
-        System.out.println(leaders);
+        //  System.out.println(leaders);
         ArrayList<Integer> res = new ArrayList<>();
 
         for (HashSet<Integer> hs : leaders.values()) {
@@ -106,7 +105,7 @@ public class programming04 {
         }
         //System.out.println(node);
         currentTime++;
-        finishTime.put(node, currentTime);
+        finishTime.put(node, currentTime); // a node is set to finish states when all adj of that node is finished.
     }
 
     //iterative
@@ -117,30 +116,45 @@ public class programming04 {
         visited.add(node);
         inner.add(node);
 
-        Stack<Integer> backtrack = new Stack();
+        Stack<ArrayList<Integer>> backtrack = new Stack<>();
+        //Stack<Integer> backtrack = new Stack();
         while (!st.isEmpty()) {
             int curr = st.pop();
 
             HashSet<Integer> heads = getUnvisitedHead(map, curr);
-            //inner.add(curr);
-            if (heads != null) {
+
+            if (heads != null && heads.size() != 0) {
                 for (Integer head : heads) {
                     st.push(head);
                     visited.add(head);
                     inner.add(head);
                 }
-                backtrack.push(curr);
+                ArrayList<Integer> tracking = new ArrayList(heads);
+                tracking.add(curr);
+                backtrack.add(tracking);
             } else {
                 currentTime++;
                 finishTime.put(curr, currentTime);
-            }
+                finished.add(curr);
 
+                while (!backtrack.isEmpty() && isAllChildrenFinished(backtrack.peek())) { // a node is set to finish states when all adj of that node is finished.
+                    ArrayList<Integer> top = backtrack.peek();
+                    currentTime++;
+                    int parent = top.get(top.size() - 1);
+                    finishTime.put(parent, currentTime);
+                    finished.add(parent);
+                    backtrack.pop();
+                }
+            }
         }
-        while (!backtrack.isEmpty()) {
-            currentTime++;
-            int pop = backtrack.pop();
-            finishTime.put(pop, currentTime);
+    }
+
+    public static Boolean isAllChildrenFinished(ArrayList<Integer> list) {
+        for (int i = 0; i < list.size() - 2; i++) {
+            if (!finished.contains(list.get(i)))
+                return false;
         }
+        return true;
     }
 
     public static HashSet<Integer> getUnvisitedHead(HashMap<Integer, HashSet<Integer>> map, int curr) {
