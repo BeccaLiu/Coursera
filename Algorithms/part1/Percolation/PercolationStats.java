@@ -1,4 +1,4 @@
-package Algorithms.part1;
+package Algorithms.part1.Percolation;
 
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.StdRandom;

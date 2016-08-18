@@ -1,4 +1,4 @@
-package Algorithms.part1;
+package Algorithms.part1.Percolation;
 /**
  * Created by rliu on 5/25/16.
  */
