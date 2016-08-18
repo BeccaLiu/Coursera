@@ -1,5 +1,6 @@
+/*
 Write a code fragment that puts the binary representation of a positive integer N into a String s
-
+*/
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 
